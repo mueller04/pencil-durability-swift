@@ -9,11 +9,11 @@ class PencilDurabilitySwiftTests: QuickSpec {
         describe("write") {
             
             context("given a piece of paper") {
-                var pencil = Pencil()
+                var pencil = Pencil(point: 100)
                 var paper = Paper()
                 
                 beforeEach {
-                    pencil = Pencil()
+                    pencil = Pencil(point: 100)
                     paper = Paper()
                     paper.text = "a "
                 }
@@ -26,6 +26,26 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 it("should write several characters") {
                     let result = pencil.write(paper: paper, text: "text")
                     expect(result.text).to(equal("a text"))
+                }
+            }
+            
+            context("point degradation") {
+                var paper = Paper()
+                
+                beforeEach {
+                    paper = Paper()
+                }
+                
+                it("should be able to write all lowercase characters") {
+                    let pencil = Pencil(point: 4)
+                    let result = pencil.write(paper: paper, text: "text")
+                    expect(result.text).to(equal("text"))
+                }
+                
+                it("should not able to write all lowercase characters") {
+                    let pencil = Pencil(point: 4)
+                    let result = pencil.write(paper: paper, text: "textes")
+                    expect(result.text).to(equal("text  "))
                 }
             }
         }
