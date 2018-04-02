@@ -18,7 +18,7 @@ class PencilDurabilitySwiftTests: QuickSpec {
                     paper.text = "a "
                 }
                 
-                it("should say hello") {
+                it("should write a character") {
                     let result = pencil.write(paper: paper, text: "t")
                     expect(result.text).to(equal("a t"))
                 }
