@@ -22,6 +22,11 @@ class PencilDurabilitySwiftTests: QuickSpec {
                     let result = pencil.write(paper: paper, text: "t")
                     expect(result.text).to(equal("a t"))
                 }
+                
+                it("should write several characters") {
+                    let result = pencil.write(paper: paper, text: "text")
+                    expect(result.text).to(equal("a text"))
+                }
             }
         }
     }
