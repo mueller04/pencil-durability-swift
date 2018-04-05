@@ -9,21 +9,34 @@ class Pencil {
     
     func write(paper: Paper, text: String) -> Paper {
         
-        let upperCase = CharacterSet.uppercaseLetters
         
-        for char in text.unicodeScalars {
-            if point > 1 && upperCase.contains(char) {
-                    paper.text.append(String(char))
+        for char in text {
+            
+            if eligibleUpperCaseLetter(char: char, point: point) {
+                paper.append(newText: char)
                     point = point - 2
             } else if point > 0 {
-                paper.text.append(String(char))
-                point = point - 1
+                if char == " " {
+                    appendSpace(paper: paper)
+                } else {
+                    paper.append(newText: char)
+                    point = point - 1
+                }
             } else {
-                paper.text.append(" ")
+                appendSpace(paper: paper)
             }
         }
-        
         return paper
-    }    
+    }
+    
+    private func appendSpace(paper: Paper) {
+        paper.append(newText: " ")
+    }
+    
+    private func eligibleUpperCaseLetter(char: Character, point: Int) -> Bool {
+        let upperCase = CharacterSet.uppercaseLetters
+        let unicodeChar = char.unicodeScalars.first!
+        return point > 1 && upperCase.contains(unicodeChar)
+    }
 }
 

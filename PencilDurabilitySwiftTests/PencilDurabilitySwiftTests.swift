@@ -55,6 +55,12 @@ class PencilDurabilitySwiftTests: QuickSpec {
                     let result = pencil.write(paper: paper, text: "TExt")
                     expect(result.text).to(equal("TEx "))
                 }
+                
+                it("does not reduce a point when writing a space") {
+                    let pencil = Pencil(point: 2)
+                    let result = pencil.write(paper: paper, text: "t te")
+                    expect(result.text).to(equal("t t "))
+                }
             }
         }
     }
