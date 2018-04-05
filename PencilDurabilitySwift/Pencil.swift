@@ -9,9 +9,14 @@ class Pencil {
     
     func write(paper: Paper, text: String) -> Paper {
         
-        for char in text {
-            if (point > 0) {
-                paper.text.append(char)
+        let upperCase = CharacterSet.uppercaseLetters
+        
+        for char in text.unicodeScalars {
+            if point > 1 && upperCase.contains(char) {
+                    paper.text.append(String(char))
+                    point = point - 2
+            } else if point > 0 {
+                paper.text.append(String(char))
                 point = point - 1
             } else {
                 paper.text.append(" ")

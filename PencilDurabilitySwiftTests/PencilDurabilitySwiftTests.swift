@@ -9,8 +9,8 @@ class PencilDurabilitySwiftTests: QuickSpec {
         describe("write") {
             
             context("given a piece of paper") {
-                var pencil = Pencil(point: 100)
-                var paper = Paper()
+                var pencil: Pencil!
+                var paper: Paper!
                 
                 beforeEach {
                     pencil = Pencil(point: 100)
@@ -30,10 +30,12 @@ class PencilDurabilitySwiftTests: QuickSpec {
             }
             
             context("point degradation") {
-                var paper = Paper()
-                
+                var pencil: Pencil!
+                var paper: Paper!
+
                 beforeEach {
                     paper = Paper()
+                    pencil = Pencil(point: 100)
                 }
                 
                 it("should be able to write all lowercase characters") {
@@ -46,6 +48,12 @@ class PencilDurabilitySwiftTests: QuickSpec {
                     let pencil = Pencil(point: 4)
                     let result = pencil.write(paper: paper, text: "textes")
                     expect(result.text).to(equal("text  "))
+                }
+                
+                it("uppercase characters count as 2 points") {
+                    let pencil = Pencil(point: 5)
+                    let result = pencil.write(paper: paper, text: "TExt")
+                    expect(result.text).to(equal("TEx "))
                 }
             }
         }
