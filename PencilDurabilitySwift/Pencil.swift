@@ -2,9 +2,12 @@ import Foundation
 
 class Pencil {
     var point: Int
+    var initialPoint: Int
+    var length: Int = 3
     
     init(point: Int) {
         self.point = point
+        self.initialPoint = point
     }
     
     func write(paper: Paper, text: String) -> Paper {
@@ -17,7 +20,6 @@ class Pencil {
                     point = point - 2
             } else if point > 0 {
                 
-        
                 if char == "\n"{
                     paper.append(newText: char)
                 } else if char == " " {
@@ -32,6 +34,13 @@ class Pencil {
             }
         }
         return paper
+    }
+    
+    func sharpen() -> Void {
+        if length > 0 {
+            point = initialPoint
+            length = length - 1
+        }
     }
     
     private func appendSpace(paper: Paper) {

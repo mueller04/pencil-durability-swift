@@ -75,5 +75,50 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 }
             }
         }
+        describe("sharpen") {
+            var pencil: Pencil!
+            var paper: Paper!
+            
+            beforeEach {
+                pencil = Pencil(point: 100)
+                paper = Paper()
+            }
+            
+            it("can sharpen to original sharpness") {
+                let pencil = Pencil(point: 2)
+                let _ = pencil.write(paper: paper, text: "tt")
+                pencil.sharpen()
+                
+                expect(pencil.point).to(equal(2))
+            }
+            
+            it("can sharpen to original sharpness with a new initial value") {
+                let pencil = Pencil(point: 3)
+                let _ = pencil.write(paper: paper, text: "tt")
+                pencil.sharpen()
+                
+                expect(pencil.point).to(equal(3))
+            }
+            
+            it("can sharpen the number of times equal to length") {
+                let pencil = Pencil(point: 3)
+                pencil.sharpen()
+                pencil.sharpen()
+                pencil.sharpen()
+
+                expect(pencil.point).to(equal(3))
+            }
+            
+            it("cannot sharpen more times than its length") {
+                let pencil = Pencil(point: 3)
+                pencil.sharpen()
+                pencil.sharpen()
+                pencil.sharpen()
+                let _ = pencil.write(paper: paper, text: "tt")
+                pencil.sharpen()
+                
+                expect(pencil.point).to(equal(1))
+            }
+        }
     }
 }
