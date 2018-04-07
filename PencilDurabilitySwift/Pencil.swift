@@ -12,7 +12,6 @@ class Pencil {
     
     func write(paper: Paper, text: String) -> Paper {
         
-        
         for (i, char) in text.enumerated() {
             
             if eligibleToWriteUpperCaseLetter(char: char, point: point) {
@@ -52,4 +51,3 @@ class Pencil {
         return point > 1 && charString == charString.uppercased()
     }
 }
-
