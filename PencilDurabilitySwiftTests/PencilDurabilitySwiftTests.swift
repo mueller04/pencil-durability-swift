@@ -61,6 +61,18 @@ class PencilDurabilitySwiftTests: QuickSpec {
                     let result = pencil.write(paper: paper, text: "t te")
                     expect(result.text).to(equal("t t "))
                 }
+                
+                it("does not reduce a point when writing a new line") {
+                    let pencil = Pencil(point: 2)
+                    let result = pencil.write(paper: paper, text: "t\nte")
+                    expect(result.text).to(equal("t\nt "))
+                }
+                
+                it("reduces a point for \\") {
+                    let pencil = Pencil(point: 2)
+                    let result = pencil.write(paper: paper, text: "t\\te")
+                    expect(result.text).to(equal("t\\  "))
+                }
             }
         }
     }

@@ -10,18 +10,23 @@ class Pencil {
     func write(paper: Paper, text: String) -> Paper {
         
         
-        for char in text {
+        for (i, char) in text.enumerated() {
             
-            if eligibleUpperCaseLetter(char: char, point: point) {
+            if eligibleToWriteUpperCaseLetter(char: char, point: point) {
                 paper.append(newText: char)
                     point = point - 2
             } else if point > 0 {
-                if char == " " {
+                
+        
+                if char == "\n"{
+                    paper.append(newText: char)
+                } else if char == " " {
                     appendSpace(paper: paper)
                 } else {
                     paper.append(newText: char)
                     point = point - 1
                 }
+                
             } else {
                 appendSpace(paper: paper)
             }
@@ -33,10 +38,9 @@ class Pencil {
         paper.append(newText: " ")
     }
     
-    private func eligibleUpperCaseLetter(char: Character, point: Int) -> Bool {
-        let upperCase = CharacterSet.uppercaseLetters
-        let unicodeChar = char.unicodeScalars.first!
-        return point > 1 && upperCase.contains(unicodeChar)
+    private func eligibleToWriteUpperCaseLetter(char: Character, point: Int) -> Bool {
+        let charString = String(char)
+        return point > 1 && charString == charString.uppercased()
     }
 }
 
