@@ -8,16 +8,6 @@ class Paper {
     }
     
     func erase(textToErase: String) {
-        
         text = text.replacingOccurrences(of: textToErase + " ", with: "")
-        
-        
-//        var strArray = text.components(separatedBy: " ")
-//        
-//        for char in strArray {
-//            if char == textToErase {
-//                
-//            }
-//        }
     }
 }
