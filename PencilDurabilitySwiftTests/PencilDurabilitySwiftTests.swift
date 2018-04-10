@@ -120,5 +120,22 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 expect(pencil.point).to(equal(1))
             }
         }
+        
+        describe("erase") {
+            var pencil: Pencil!
+            var paper: Paper!
+            
+            beforeEach {
+                pencil = Pencil(point: 100)
+                paper = Paper()
+            }
+            
+            it("can erase a word") {
+                paper.text = "the fox jumped over the lamb"
+                paper.erase(textToErase: "jumped")
+                
+                expect(paper.text).to(equal("the fox over the lamb"))
+            }
+        }
     }
 }
