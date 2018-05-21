@@ -136,6 +136,21 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 
                 expect(paper.text).to(equal("the fox over the lamb"))
             }
+            
+            it("will erase the last occurance of the word") {
+                paper.text = "the sun the moon the stars"
+                paper.erase(textToErase: "the")
+                
+                expect(paper.text).to(equal("sun the moon the stars"))
+                
+                paper.erase(textToErase: "the")
+                
+                expect(paper.text).to(equal("sun moon the stars"))
+                
+                paper.erase(textToErase: "the")
+                
+                expect(paper.text).to(equal("sun moon stars"))
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ class Pencil {
     
     func write(paper: Paper, text: String) -> Paper {
         
-        for (i, char) in text.enumerated() {
+        for (_, char) in text.enumerated() {
             
             if eligibleToWriteUpperCaseLetter(char: char, point: point) {
                 paper.append(newText: char)
