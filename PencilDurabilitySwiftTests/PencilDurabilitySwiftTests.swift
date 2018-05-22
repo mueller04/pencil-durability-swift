@@ -141,11 +141,11 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 paper.text = "the sun the moon the stars"
                 paper.erase(textToErase: "the")
                 
-                expect(paper.text).to(equal("sun the moon the stars"))
+                expect(paper.text).to(equal("the sun the moon stars"))
                 
                 paper.erase(textToErase: "the")
                 
-                expect(paper.text).to(equal("sun moon the stars"))
+                expect(paper.text).to(equal("the sun moon stars"))
                 
                 paper.erase(textToErase: "the")
                 

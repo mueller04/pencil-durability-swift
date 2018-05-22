@@ -15,7 +15,7 @@ class Paper {
     
     func erase(textToErase: String) {
         
-        let separatedString = text.components(separatedBy: " ")
+        let separatedString = text.components(separatedBy: " ").reversed()
         
         var newTextArray: [String] = []
         var foundWord: Bool = false
@@ -28,6 +28,7 @@ class Paper {
             }            
         }
         
+        newTextArray = newTextArray.reversed()
         text = newTextArray.flatMap({$0}).joined(separator: " ")
     }
 }
