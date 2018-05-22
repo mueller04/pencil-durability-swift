@@ -75,6 +75,7 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 }
             }
         }
+        
         describe("sharpen") {
             var pencil: Pencil!
             var paper: Paper!
@@ -126,7 +127,7 @@ class PencilDurabilitySwiftTests: QuickSpec {
             var paper: Paper!
             
             beforeEach {
-                pencil = Pencil(point: 100)
+                pencil = Pencil(point: 100, eraser: 20)
                 paper = Paper()
             }
             
@@ -150,6 +151,30 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 result = pencil.erase(paper: paper, textToErase: "the")
                 
                 expect(result.text).to(equal("sun moon stars"))
+            }
+        }
+        
+        describe("eraser degradation") {
+            var pencil: Pencil!
+            var paper: Paper!
+            
+            beforeEach {
+                paper = Paper()
+                paper.text = "here is some text"
+            }
+            
+            it("can erase one word") {
+                pencil = Pencil(point: 100)
+                let result = pencil.erase(paper: paper, textToErase: "text")
+                
+                expect(result.text).to(equal("here is some"))
+            }
+            
+            it("can erase part of a word") {
+                pencil = Pencil(point: 100, eraser: 3)
+                let result = pencil.erase(paper: paper, textToErase: "text")
+                
+                expect(result.text).to(equal("here is some t"))
             }
         }
     }

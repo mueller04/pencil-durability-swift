@@ -4,10 +4,12 @@ class Pencil {
     var point: Int
     var initialPoint: Int
     var length: Int = 3
+    var eraser: Int
     
-    init(point: Int) {
+    init(point: Int, eraser: Int = 4) {
         self.point = point
         self.initialPoint = point
+        self.eraser = eraser
     }
     
     func write(paper: Paper, text: String) -> Paper {
@@ -52,18 +54,47 @@ class Pencil {
         for word in separatedString {
             if word == textToErase && !foundWord {
                 foundWord = true
+                
+                if word.count > eraser {
+                    newTextArray = erasePartialWord(word: word, textArray: newTextArray)
+                }
+
             } else {
-                newTextArray.append(word)
+                newTextArray.append(trim(word: word))
             }
         }
         
         newTextArray = newTextArray.reversed()
-        paper.text = newTextArray.flatMap({$0}).joined(separator: " ")
+        let resultingString = newTextArray.flatMap({$0}).joined(separator: " ")
+        paper.text = trim(word: resultingString)
+
         return paper
     }
     
     private func appendSpace(paper: Paper) {
         paper.append(newText: " ")
+    }
+    
+    private func trim(word: String) -> String {
+        return word.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    private func erasePartialWord(word: String, textArray: [String]) -> [String] {
+        var retArray = textArray
+        let wordChars = Array(word).reversed()
+        var nonErasedWordChars: [String] = []
+        
+        for char in wordChars {
+            if (eraser > 0) {
+                eraser = eraser - 1
+            } else {
+                nonErasedWordChars.append(String(char))
+            }
+        }
+        
+        let resultingNonErasedWord = String(nonErasedWordChars.flatMap({$0}).joined().reversed())
+        retArray.append(trim(word: resultingNonErasedWord))
+        return retArray
     }
     
     private func eligibleToWriteUpperCaseLetter(char: Character, point: Int) -> Bool {
