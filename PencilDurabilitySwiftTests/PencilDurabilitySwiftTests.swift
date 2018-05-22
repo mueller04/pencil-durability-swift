@@ -132,24 +132,24 @@ class PencilDurabilitySwiftTests: QuickSpec {
             
             it("can erase a word") {
                 paper.text = "the fox jumped over the lamb"
-                paper.erase(textToErase: "jumped")
+                let result = pencil.erase(paper: paper, textToErase: "jumped")
                 
-                expect(paper.text).to(equal("the fox over the lamb"))
+                expect(result.text).to(equal("the fox over the lamb"))
             }
             
             it("will erase the last occurance of the word") {
                 paper.text = "the sun the moon the stars"
-                paper.erase(textToErase: "the")
+                var result = pencil.erase(paper: paper, textToErase: "the")
                 
-                expect(paper.text).to(equal("the sun the moon stars"))
+                expect(result.text).to(equal("the sun the moon stars"))
                 
-                paper.erase(textToErase: "the")
+                result = pencil.erase(paper: paper, textToErase: "the")
                 
-                expect(paper.text).to(equal("the sun moon stars"))
+                expect(result.text).to(equal("the sun moon stars"))
                 
-                paper.erase(textToErase: "the")
+                result = pencil.erase(paper: paper, textToErase: "the")
                 
-                expect(paper.text).to(equal("sun moon stars"))
+                expect(result.text).to(equal("sun moon stars"))
             }
         }
     }

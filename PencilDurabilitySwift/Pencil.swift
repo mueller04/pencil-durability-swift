@@ -42,6 +42,26 @@ class Pencil {
         }
     }
     
+    func erase(paper: Paper, textToErase: String) -> Paper {
+        
+        let separatedString = paper.text.components(separatedBy: " ").reversed()
+        
+        var newTextArray: [String] = []
+        var foundWord: Bool = false
+        
+        for word in separatedString {
+            if word == textToErase && !foundWord {
+                foundWord = true
+            } else {
+                newTextArray.append(word)
+            }
+        }
+        
+        newTextArray = newTextArray.reversed()
+        paper.text = newTextArray.flatMap({$0}).joined(separator: " ")
+        return paper
+    }
+    
     private func appendSpace(paper: Paper) {
         paper.append(newText: " ")
     }

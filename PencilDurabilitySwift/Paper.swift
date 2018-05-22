@@ -12,23 +12,4 @@ class Paper {
     func append(newText: Character) {
         text.append(newText)
     }
-    
-    func erase(textToErase: String) {
-        
-        let separatedString = text.components(separatedBy: " ").reversed()
-        
-        var newTextArray: [String] = []
-        var foundWord: Bool = false
-        
-        for word in separatedString {
-            if word == textToErase && !foundWord {
-                foundWord = true
-            } else {
-                newTextArray.append(word)
-            }            
-        }
-        
-        newTextArray = newTextArray.reversed()
-        text = newTextArray.flatMap({$0}).joined(separator: " ")
-    }
 }
