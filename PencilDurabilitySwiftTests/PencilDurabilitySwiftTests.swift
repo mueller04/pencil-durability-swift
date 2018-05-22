@@ -185,7 +185,7 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 expect(result.text).to(equal("here is some"))
             }
             
-            fit ("can erase 2 words") {
+            it ("can erase 2 words") {
                 pencil = Pencil(point: 100, eraser: 8)
 
                 var intermediatePaper = pencil.erase(paper: paper, textToErase: "text")
@@ -203,6 +203,17 @@ class PencilDurabilitySwiftTests: QuickSpec {
 
                 
                 expect(result.text).to(equal("here"))
+            }
+            
+            it ("can erase multiple whole words and partial letters") {
+                pencil = Pencil(point: 100, eraser: 9)
+                
+                var intermediatePaper = pencil.erase(paper: paper, textToErase: "text")
+                intermediatePaper = pencil.erase(paper: intermediatePaper, textToErase: "some")
+                let result = pencil.erase(paper: intermediatePaper, textToErase: "is")
+                
+                
+                expect(result.text).to(equal("here i"))
             }
         }
     }
