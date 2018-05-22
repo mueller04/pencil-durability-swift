@@ -58,6 +58,8 @@ class Pencil {
                 if word.count > eraser {
                     newTextArray = erasePartialWord(word: word, textArray: newTextArray)
                 }
+            
+                eraser = eraser - word.count
 
             } else {
                 newTextArray.append(trim(word: word))

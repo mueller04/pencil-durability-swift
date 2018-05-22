@@ -176,6 +176,34 @@ class PencilDurabilitySwiftTests: QuickSpec {
                 
                 expect(result.text).to(equal("here is some t"))
             }
+            
+            it("cannot keep erasing more words after eraser runes out") {
+                pencil = Pencil(point: 100)
+                var intermediatePaper = pencil.erase(paper: paper, textToErase: "text")
+                let result = pencil.erase(paper: intermediatePaper, textToErase: "some")
+
+                expect(result.text).to(equal("here is some"))
+            }
+            
+            fit ("can erase 2 words") {
+                pencil = Pencil(point: 100, eraser: 8)
+
+                var intermediatePaper = pencil.erase(paper: paper, textToErase: "text")
+                let result = pencil.erase(paper: intermediatePaper, textToErase: "some")
+                
+                expect(result.text).to(equal("here is"))
+            }
+            
+            it ("can erase 3 words") {
+                pencil = Pencil(point: 100, eraser: 10)
+                
+                var intermediatePaper = pencil.erase(paper: paper, textToErase: "text")
+                intermediatePaper = pencil.erase(paper: intermediatePaper, textToErase: "some")
+                let result = pencil.erase(paper: intermediatePaper, textToErase: "is")
+
+                
+                expect(result.text).to(equal("here"))
+            }
         }
     }
 }
